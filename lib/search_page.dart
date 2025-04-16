@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:untitled/data/category_model.dart';
 import 'package:untitled/data/hive_boxes.dart';
 import 'package:untitled/data/item_model.dart';
 
@@ -20,10 +21,14 @@ class _SearchPageState extends State<SearchPage> {
   String cuttentCategory = "All";
 
   String searchText = '';
-
+  List categoryes = ["All"];
   @override
   void initState() {
     super.initState();
+    Hive.box<CategoryModel>(HiveBoxes.categoryModel).values.forEach((action) {
+      categoryes.insert(0, action.name);
+    });
+
     searchController.addListener(() {
       setState(() {
         searchText = searchController.text.toLowerCase();
@@ -42,9 +47,7 @@ class _SearchPageState extends State<SearchPage> {
               valueListenable:
                   Hive.box<ItemModel>(HiveBoxes.itemModel).listenable(),
               builder: (context, Box<ItemModel> box, _) {
-                List categoryes = ["All"];
                 final places = box.values.where((item) {
-                  categoryes.insert(0, item.category?.name);
                   final matchesCategory = cuttentCategory == "All" ||
                       item.category?.name == cuttentCategory;
                   final matchesSearch =
@@ -99,6 +102,7 @@ class _SearchPageState extends State<SearchPage> {
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
                                     focusedBorder: InputBorder.none,
+                                    isDense: true,
                                     hintText: 'Search',
                                     hintStyle: TextStyle(
                                         fontWeight: FontWeight.bold,
@@ -179,6 +183,13 @@ class _SearchPageState extends State<SearchPage> {
                       SizedBox(
                         height: 31.46.h,
                       ),
+                      if (places.isEmpty) ...[
+                        Text(
+                          "Not found",
+                          style: TextStyle(
+                              fontSize: 24.sp, fontWeight: FontWeight.bold),
+                        )
+                      ],
                       for (var item in places)
                         Container(
                           width: 345.w,

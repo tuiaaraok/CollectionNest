@@ -97,7 +97,13 @@ class _CatalogPageState extends State<CatalogPage> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        SvgPicture.asset(e.svgPath),
+                                        SvgPicture.asset(
+                                          e.svgPath,
+                                          color: Colors.white,
+                                        ),
+                                        SizedBox(
+                                          height: 9.h,
+                                        ),
                                         Text(
                                           e.name,
                                           maxLines: 2,

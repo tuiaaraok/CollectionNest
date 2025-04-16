@@ -110,7 +110,7 @@ class _NewCatalogsPageState extends State<NewCatalogsPage> {
                               ),
                               Container(
                                 width: 279.w,
-                                height: 103.h,
+                                padding: EdgeInsets.symmetric(vertical: 10.h),
                                 decoration: BoxDecoration(
                                     color: Colors.white,
                                     boxShadow: [
@@ -125,23 +125,33 @@ class _NewCatalogsPageState extends State<NewCatalogsPage> {
                                     runSpacing: 9.h,
                                     children: [
                                       for (int i = 15; i < 27; i++) ...[
-                                        Container(
-                                          color: svgPath ==
-                                                  "assets/icons/category/Group 21$i.svg"
-                                              ? Color(0xFFE48569)
-                                              : Colors.transparent,
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              svgPath =
-                                                  "assets/icons/category/Group 21$i.svg";
+                                        GestureDetector(
+                                          onTap: () {
+                                            svgPath =
+                                                "assets/icons/category/Group 21$i.svg";
 
-                                              setState(() {});
-                                            },
-                                            child: SvgPicture.asset(
-                                              "assets/icons/category/Group 21$i.svg",
+                                            setState(() {});
+                                          },
+                                          child: Container(
+                                            width: 38.w,
+                                            height: 38.h,
+                                            decoration: BoxDecoration(
+                                                color: svgPath ==
+                                                        "assets/icons/category/Group 21$i.svg"
+                                                    ? Color(0xFFE48569)
+                                                    : Colors.transparent,
+                                                border: Border.all(
+                                                    color: Colors.black,
+                                                    width: 2.w),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(12.r))),
+                                            child: Center(
+                                              child: SvgPicture.asset(
+                                                "assets/icons/category/Group 21$i.svg",
+                                              ),
                                             ),
                                           ),
-                                        )
+                                        ),
                                       ]
                                     ],
                                   ),
