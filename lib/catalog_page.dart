@@ -99,6 +99,7 @@ class _CatalogPageState extends State<CatalogPage> {
                                       children: [
                                         SvgPicture.asset(
                                           e.svgPath,
+                                          // ignore: deprecated_member_use
                                           color: Colors.white,
                                         ),
                                         SizedBox(
